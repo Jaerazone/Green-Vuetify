@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <v-app>
+            <v-app-bar app color="primary">    <!-- app 을적으면 상단에만 공간을 가질수있게한다-->
+                <v-toolbar-title class="white--text mx-auto"> 그리드 레이아웃과 카드UI </v-toolbar-title>
+            </v-app-bar>
+            
+            <v-content> 
+                <v-container>
+                    <v-row>
+                        <v-col cols="12" sm="8" >
+                            <v-card >
+                                <v-img src="https://picsum.photos/id/1068/400/300" aspect-ratio="2.3"></v-img>
+                                <v-card-text>
+                                    <h2 class="title primary--text mb-2">시대정신 선도</h2>
+                                    비주얼 컴퍼니에 관심을 가져 주셔서 감사합니다. 비주얼 컴퍼니는 오랜 역사를 지니며 그동안 많은 발전을 하였습니다.
+                                </v-card-text>
+                            </v-card>
+                        </v-col>
+
+                        <v-col cols="12" sm="4">
+                            <v-card >
+                                <v-img src="https://picsum.photos/id/1068/400/300" aspect-ratio="2.3"></v-img>
+                                <v-card-text>
+                                    <h2 class="title primary--text mb-2">시대정신 선도</h2>
+                                    비주얼 컴퍼니에 관심을 가져 주셔서 감사합니다. 비주얼 컴퍼니는 오랜 역사를 지니며 그동안 많은 발전을 하였습니다.
+                                </v-card-text>
+                            </v-card>
+                        </v-col>
+                        
+                    </v-row>
+                </v-container>
+                
+            </v-content>
+
+            
+            <v-footer color="primary" dark>
+                <div class="mx-auto"> Copyright &copy; {{ new Date().getFullYear() }}</div>
+            </v-footer>
+        
+        </v-app>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app",
+            vuetify : new Vuetify()
+        })
+    </script>
+    
+</body>
+</html>

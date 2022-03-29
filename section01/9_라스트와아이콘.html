@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <v-app>
+            <v-app-bar app color="blue">
+                <v-app-bar-nav-icon></v-app-bar-nav-icon>
+                <v-toolbar-title> OO 회사 </v-toolbar-title>
+            </v-app-bar>
+
+            <v-content>
+                <v-container>
+                    <ul>
+                        <li>v-list는 ul 이고, v-list-item li이다.</li>
+                    </ul>
+                    <!-- 값을 넣어서 확인 -->
+                    <!-- -card로 바꾸면 카드형식으로 사용가능-->
+                    <v-card>
+                        <v-list v-for="item in aList">
+                            <!-- v-list나 v-list-item에 v-for해도 둘다됨 -->
+                            <v-list-item @click="">
+                                <!-- @click 이벤트 뷰티파이 효과있음 -->
+                                
+                                <!-- v-list-item 안에는 아바타,컨텐츠2가지가-->
+                                <v-list-item-avatar> 
+                                    <!-- v-list-item-avatar : 하나의 목록 안에 아이콘을 넣고싶다면 사용함-->
+                                    <!-- v-icon안에 mdi- 뒤 아이콘이름 넣어준다 -->
+                                    <v-icon :class="item.icon_style"> {{item.icon_name}} </v-icon>
+                                </v-list-item-avatar>
+
+                                <v-list-item-content>
+                                    <v-list-title>{{item.title}}</v-list-title>
+                                </v-list-item-content>
+
+                                <v-list-item-action>
+                                    <v-btn icon>
+                                        <v-icon>{{item.icon}}</v-icon>
+                                    </v-btn>
+                                </v-list-item-action>
+
+                            </v-list-item>
+                        </v-list>
+                    </v-card>
+                </v-container>
+            </v-content>
+
+            <v-footer>
+                <div> Footer입니다 </div>
+            </v-footer>
+
+        </v-app>
+
+    </div>
+
+    <script>
+        new Vue({
+            el : '#app',
+            vuetify : new Vuetify(),
+            data : {
+                aList : [
+                    {
+                        icon_name : 'mdi-camera',
+                        icon_style : 'red white--text',
+                        title : '제품이1미지',
+                        icon:'help_outline'
+                    },
+                    {
+                        icon_name : 'mdi-camera',
+                        icon_style : 'red white--text',
+                        title : '제품2이미지',
+                        icon:'task_alt'
+                    },
+                    {
+                        icon_name : 'mdi-camera',
+                        icon_style : 'red white--text',
+                        title : '제품3이미지',
+                        icon:'grade'
+                    }
+                ]
+            }
+        })
+    </script>
+</body>
+</html>

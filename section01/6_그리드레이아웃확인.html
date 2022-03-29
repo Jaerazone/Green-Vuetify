@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    
+    <style>
+        .border_style {
+            border: 1px solid blue;
+            background-color: teal;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <v-app>
+        <v-content>
+            <v-container>
+                <!-- v-row를 이용하면 하나의 행을 만들수 있다 -->
+                <v-row>
+                    <!-- v-cols를 이용하면 안에 들어가는 열을 만들수 있다 -->
+                    <v-col cols="12" class="border_style">그리드 12</v-col>
+                    <!-- clos을 이용하여 차지하는 열의 갯수를 정할수 있다 -->
+                    <v-col cols="6" class="border_style">그리드 6</v-col>
+
+                    <v-col cols="1" class="border_style" v-for="item in 12">그리드1</v-col>
+                    <v-col class="border_style">그리드 auto로 남는공간에 분배됨</v-col>
+                    <v-col class="border_style">그리드 auto로 남는공간에 분배됨</v-col>
+                    <!-- 행 : row12열이(1행)
+                    열 : v-col
+                    열사이간격조절 : offset속성
+                    기기별 정렬 속성 : text-코드명-정렬명 -->
+                </v-row>
+            </v-container>
+            <v-container>
+                <v-row>
+                    <v-col sm="4" class="border_style"> sm4</v-col>
+                    <!-- offset으로 그리드 사이에 4개의 열 간격을 띄움 -->
+                    <v-col sm="4" offset-sm="4" class="border_style"> sm4</v-col>
+                <v-row>
+            </v-container>
+        </v-content>
+        </v-app>
+    </div>
+
+    
+    <script>
+        new Vue({
+        el: '#app',
+        vuetify: new Vuetify(),
+        })
+    </script>
+</body>
+</html>
