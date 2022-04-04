@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <v-app>
+            <!-- 앱바 영역 -->
+            <v-app-bar app color="primary" dark>
+                <v-app-bar-nav-icon @click=" ndrawer = true"></v-app-bar-nav-icon> <!-- 6) -->
+                <v-toolbar-title>부산 관광 안내</v-toolbar-title>
+            </v-app-bar>
+
+            <!-- 서랍 영역 -->
+            <v-navigation-drawer v-model="ndrawer" temporary absolute> <!--5) value="true" 를 v-model="ndrawer"로 바꿈-->
+            <!-- temporary : 가장 위에 위치, absolute : 서랍의 위치가 고정됨-->
+            <v-toolbar flat >
+                <v-list>
+                    <v-list-item>
+                        <v-list-item-avatar>
+                            <v-icon class="grey white--text">mdi-account</v-icon>
+                        </v-list-item-avatar>
+                        <v-list-item-content>
+                            <v-list-item-title>즐거운 부산</v-list-item-title>
+                            <v-list-item-subtitle>다이나믹 부산</v-list-item-subtitle>
+                        </v-list-item-content>
+                    </v-list-item>
+                </v-list>
+            </v-toolbar>
+            <v-divider></v-divider>
+            
+            <v-list> <!-- 2) -->
+                <v-list-item href="#" v-for="menu in menuList" :key="menu.title"> 
+                <!-- 3)key값은 겹치치않는거로 들고와야함 title은 겹치지않음 -->
+                <!--
+                    <v-list-item  href="#"  v-for="(menu, index) in menuList" :key="menu.title" >
+                -->
+                <!-- 4)혹은 인덱스값을 가져오려면 인덱스를 key값으로해도됨-->
+                    <v-list-item-action> <!--버튼을만들기위해 action-->
+                        <v-icon>{{menu.icon}}</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                        <v-list-item-title>
+                            {{menu.title}}
+                        </v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+            </v-list>
+
+            </v-navigation-drawer>
+
+            <!-- 본문 내용 -->
+            <v-main> <!-- v-main : 메인을 안적으면 앱바 가려서 안보임 이안에 꼭 적어야 잘보임-->
+                <!-- 그리드를 이용해서 화면 출력 -->
+                <v-container>
+                    <h1 class="d-flex justify-center">현재 인기있는 곳입니다</h1>
+                    <p class="d-flex justify-center">추천을 통해 인기있는 곳을 골라주세요</p>
+
+                    <!-- 그리드를 이용해서 화면 출력 -->
+                    <v-row>
+                        <v-col cols="12" sm="6"
+                        v-for="(picture, index) in pictures"
+                        > 
+                        <!--
+                            cols :화면줄었을땐 한줄 sm : 노트북화면은 6칸
+                            8) v-for문에 "( , index) "인덱스값을 가져오면된다.
+                        -->
+                            <v-card > 
+                                <v-img :src="picture.src"
+                                    aspect-ratio="2.0" ></v-img>
+                                <v-card-title>{{picture.title}}</v-card-title>
+                                <v-card-actions>
+                                    <h3>{{picture.count}}</h3> 
+                                    <p>{{index}}</p>
+                                    <v-spacer></v-spacer>
+                                    <v-btn @click="countUp(index)">추천</v-btn> 
+                                    <!--9) 이벤트에 메소드만사용할꺼면 countUp만쓰고 안의값까지 사용하려면 (index)까지써줌-->
+                                </v-card-actions>
+                            </v-card>
+                        </v-col>
+                    </v-row>
+                </v-container>
+
+                <!-- 11) 새로운 컨테이너를 만든다 -->
+                <recommend-list :recommend="recommend"></recommend-list>
+                <!--
+                    :recommend="recommend"
+                    앞 recommendList의 props 속성 = 뒤 뷰의 데이터값(root)
+                -->
+
+            </v-main>
+        </v-app>
+    </div>
+
+    <script src="./recommendList.js"></script>
+
+    <script>
+        new Vue({
+            el : '#app',
+            vuetify : new Vuetify(),
+            // 1) 아이콘과 데이터를 배열로 넣어본다
+            data : {
+                menuList : [
+                    {
+                        title : '메인페이지',
+                        icon : 'mdi-card-bulleted-outline'
+                    },
+                    {
+                        title : '관광지 소개',
+                        icon : 'mdi-content-paste'
+                    },
+                    {
+                        title : '추천명소',
+                        icon : 'mdi-check'
+                    }
+                ],
+                ndrawer : false, // 7)
+                pictures : [
+                    {
+                        count : 0,
+                        title : '해운대',
+                        src : 'http://www.coindeskkorea.com/news/photo/202008/71347_7840_5322.jpg'
+                    },
+                    {
+                        count : 0,
+                        title : '바다 야경 도시',
+                        src : 'https://post-phinf.pstatic.net/MjAxNzA3MDVfMTc5/MDAxNDk5MjQ1NTM0NTc0.EquJ74J4oQQEGIYjGB9AcNfivARwgxCu26fxMTXaBsgg.ygQtABWqUEJptnYwji7B_rFsvJDSjziFztNmLBnMwBkg.JPEG/1.jpg?type=w1200'
+                    },
+                    {
+                        count : 0,
+                        title : '광안대교',
+                        src : 'https://file.mk.co.kr/meet/neds/2018/06/image_readtop_2018_403054_15300003613365886.jpg'
+                    },
+                    {
+                        count : 0,
+                        title : '해운대 인어동상',
+                        src : 'http://db.kookje.co.kr/news2000/photo/2009/0502/L20090502.22009214725i1.jpg'
+                    }
+                ],
+                name : '', // 13)
+                recommend : [] // 16) 이제 이름하나만 출력되는게 아니라 아래 쭉 나열되도록 배열로 만들어줌
+                //17) name에서 recommend로 이제 다 바꾸자
+            },
+            methods : {
+                countUp : function (i) { //10) 매개변수를 정해줘야한다. 임의로 i (index의 0~3사이 값이 i에 들어감)
+                    this.pictures[i].count++;
+                    //this.name = "값이 바뀌었습니다"; // 14) 버튼클릭하면 값이 바뀌도록함
+                    this.recommend.push(this.pictures[i].title) // 15) title로 바꿔줌
+                }
+            }
+        })
+    </script>
+</body>
+</html>

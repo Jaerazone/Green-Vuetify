@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <v-app>
+            <v-layout justify-center>
+                <v-btn @click= "dialog=true" color="primary">결제</v-btn>
+
+                <v-dialog v-model="dialog" persistent max-width="400"> 
+                    <!-- true가 되자마자 밑에 v-card가 실행됨! -->
+                    <!-- persistent : 바깥을 눌렀을때 꺼지지 않게함-->
+                    <v-card>
+                        <v-card-title>동유럽 여행</v-card-title>
+                        <v-card-text>전 과정 4성급 호텔, 결제하시겠습니까?</v-card-text>
+                        <v-card-actions>
+                            <!-- v-spacer를 통해 공간을 만들어준다-->
+                            <v-spacer></v-spacer>
+                            <v-btn @click= "btnClick" color="green darken-1">취소</v-btn>
+                            <v-btn @click= "btnClick" color="green darken-1">확인</v-btn>
+                        </v-card-actions>
+                    
+                    </v-card>
+                </v-dialog>
+            </v-layout>
+
+        </v-app>
+
+    </div>
+
+    <script>
+        new Vue({
+            el : '#app',
+            vuetify : new Vuetify(),
+            data : {
+                dialog : true
+            },
+            methods : {
+                btnClick : function (e) {  
+                    // Vue도 자바스크립트의 프레임워크이기때문에 자바script의 내용을 쓸수있다.
+                    // 인수를 받지않으면 이벤트객체인 e로 넣어줌, 취소와 확인 으로 체크됨
+                    if(e.target.innerHTML=="확인") {
+                        console.log("결제가 진행됩니다");
+                    }
+                    this.dialog = false;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
